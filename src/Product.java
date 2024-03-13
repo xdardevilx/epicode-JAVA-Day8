@@ -1,3 +1,4 @@
+import java.util.List;
 import java.util.Random;
 
 public class Product {
@@ -30,5 +31,12 @@ Random random = new Random();
     public void setPrice(double price){
 
         this.price = price;
+    }
+
+    public List<Product> sameCategory(List<Product> products){
+        return products.stream().filter(p -> p.getCategory().equals("books") && (p.getPrice()>100)).toList();
+    }
+    public List<Product> searchCategoryByBoys(List<Product> products){
+        return products.stream().filter(p -> p.getCategory().equals("boys")).toList();
     }
 }
