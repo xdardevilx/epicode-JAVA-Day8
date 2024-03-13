@@ -21,8 +21,30 @@ public class Order {
 
     }
 
+    public String getStatus() {
+        return status;
+    }
+
+    public LocalDate getOrderDate() {
+        return orderDate;
+    }
+
+    public Customer getCustomer() {
+        return customer;
+    }
+
+    public LocalDate getDeliveryDate() {
+        return deliveryDate;
+    }
+
     public List<Product> getProducts(){
         return this.products;
     }
 
+    public void filterOrderBaby(List<Product> products){
+        products.stream().filter(p -> p.getCategory().equals("baby")).forEach(product ->{
+            System.out.println(product.getName() + " - " + " - " + product.getCategory() +  " - " + product.getPrice());
+        });
+
+    }
 }

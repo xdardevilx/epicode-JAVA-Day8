@@ -31,7 +31,47 @@ public class Main {
         products.add(n11);
 
         Customer customer = new Customer("valerio", "10");
-        Order order = new Order("pendind", LocalDate.now(), products, customer);
+        Customer customer2 = new Customer("marco", "3");
+        Customer customer3 = new Customer("giovanni", "5");
+
+        List<Order> orders = new ArrayList<>();
+        List<Product> orderProductsBaby = new ArrayList<>();
+        orderProductsBaby.add(n6);
+        orderProductsBaby.add(n7);
+        orderProductsBaby.add(n8);
+        orders.add(new Order("pending", LocalDate.now(), orderProductsBaby, customer));
+
+
+        List<Product> orderProductsBoys = new ArrayList<>();
+        orderProductsBoys.add(n9);
+        orderProductsBoys.add(n10);
+        orderProductsBoys.add(n11);
+        orders.add(new Order("pending", LocalDate.now(), orderProductsBoys, customer2));
+
+        List<Product> orderProductsBooks = new ArrayList<>();
+        orderProductsBooks.add(n1);
+        orderProductsBooks.add(n2);
+        orderProductsBooks.add(n3);
+        orderProductsBooks.add(n4);
+        orderProductsBooks.add(n5);
+        orders.add(new Order("pending", LocalDate.now(), orderProductsBooks, customer3));
+
+        System.out.println("----------------------------------ordine baby------------------");
+
+
+        orders.stream()
+                .filter(order -> order.getProducts().stream().anyMatch(product -> product.getCategory().equals("baby")))
+                .forEach(order -> {
+                    System.out.println("Ordinato da: " + order.getCustomer().getName() + " - " + order.getStatus() + " - " + order.getOrderDate() + " - " + order.getDeliveryDate());
+                    order.getProducts().forEach(product -> {
+                        if (product.getCategory().equals("baby")) {
+                            System.out.println("    Prodotto: " + product.getName() + " - Categoria: " + product.getCategory());
+                        }
+                    });
+                });
+
+
+
 
         n1.sameCategory(products).forEach(product ->{
             if( product.getPrice() > 100 ){
@@ -39,17 +79,12 @@ public class Main {
             }
         } );
 
-        System.out.println("----------------------------------ordine baby------------------");
 
-        order.getProducts().forEach(product ->{
-            if(product.getCategory().equals("baby")){
-                System.out.println(product.getName() + " - " + " - " + product.getCategory() +  " - " + product.getPrice());
-            }
-        });
 
         System.out.println("-------------------------------- prodotti boys-------------------------");
         n1.searchCategoryByBoys(products).forEach(product -> {
-            System.out.println(product.getName() + " - " + " - " + product.getCategory() +  " - " + product.getPrice());
+
+            System.out.println(product.getName() + " - " + " - " + product.getCategory() +  " - " + product.getPrice()*0.9);
         });
 
 
